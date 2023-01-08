@@ -1,0 +1,47 @@
+<div style="padding: 20px">
+  <h2>Project - Picture viewer</h2>
+
+  <h3>List of albums:</h3>
+
+  <div style="display: flex;justify-content: space-evenly; flex-wrap: wrap;">
+    <ng-container *ngFor="let album of albums; let albumIndex = index;">
+      <div style="display: flex; flex-direction: column; cursor: pointer"
+           (click)="selectedAlbum = album; selectedAlbumIndex = albumIndex; selectedPictures = []">
+        <div>{{album.title}}</div>
+        <img width="100" height="100" [src]="album?.headerImage"></div>
+    </ng-container>
+  </div>
+
+
+  <div *ngIf="selectedAlbum">
+    <h3>Pictures within {{selectedAlbum.title}} album:</h3>
+    <div style="margin-bottom: 20px">
+      <h4>Select more than one image to show slideshow</h4>
+      <div>
+        <button [disabled]="selectedPictures.length < 2" mat-raised-button (click)="showSlideShow()">Show slideshow
+        </button>
+      </div>
+    </div>
+    <div>
+      <ng-container *ngFor="let picture of selectedAlbum.pictures; let pictureIndex = index;">
+        <div [ngStyle]="{'background-color': picture.selected ? '#e3e8e5' : null}"
+             style="margin-bottom: 10px; border: solid 1px;padding: 10px;">
+          <img width="100" height="100" [src]="selectedAlbum.path + '/' +picture?.imgLoRes">
+          <div>
+            <h4>{{picture.title}}</h4>
+            <div
+              style="max-width: 250px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{picture.comment}}</div>
+          </div>
+          <div style="margin-top: 10px">
+            <button mat-raised-button
+                    (click)="selectPicture(picture, (selectedAlbum.path + '/' + picture?.imgHiRes))">{{picture.selected ? 'Unselect' : 'Select'}}</button>
+            <button style="margin-left: 10px" mat-raised-button
+                    (click)="openPictureDetailView(picture, (selectedAlbum.path + '/' + picture?.imgHiRes), pictureIndex)">
+              View
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

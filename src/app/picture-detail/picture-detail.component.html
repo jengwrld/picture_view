@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Picture overview</h1>
+<div style="max-height: 350px" mat-dialog-content>
+  <img width="100%" [src]="data.picture.imagePath">
+</div>
+<div>
+  <p>Title</p>
+  <mat-form-field style="width: 100%" appearance="fill">
+    <input matInput [(ngModel)]="title">
+  </mat-form-field>
+</div>
+<div>
+  <p>Comment</p>
+  <mat-form-field style="width: 100%" appearance="fill">
+    <input matInput [(ngModel)]="comment">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close="false">Stäng</button>
+  <button mat-raised-button (click)="save()">Spara</button>
+</div>

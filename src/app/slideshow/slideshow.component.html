@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Slideshow (Picture {{selectedIndex + 1}} of {{pictures.length}})</h1>
+<div>
+  <div mat-dialog-content>
+    <img width="100%" [src]="pictures[selectedIndex]">
+  </div>
+  <div style="display: flex; justify-content: space-between; margin-top: 10px">
+    <div>
+      <button *ngIf="selectedIndex != 0" mat-raised-button
+              (click)="selectedIndex = selectedIndex - 1">Förgående
+      </button>
+    </div>
+    <div>
+      <button *ngIf="selectedIndex != (pictures.length - 1)" (click)="selectedIndex = selectedIndex + 1"
+              mat-raised-button>
+        Nästa
+      </button>
+    </div>
+  </div>
+</div>
